@@ -1,14 +1,24 @@
-FROM kiwenlau/serf-dnsmasq:0.1.0
+FROM serf.hadoop.cluster
 
-MAINTAINER KiwenLau <kiwenlau@gmail.com>
+MAINTAINER Martin Guo <martin.guo@irdeto.com>
 
 # install openssh-server, vim and openjdk
-RUN apt-get update -y
+RUN apt-get update 
+RUN apt-get install -y git 
+RUN apt-get install -y wget
+RUN apt-get install -y python
 RUN apt-get install -y openssh-server vim
 RUN apt-get install -y openjdk-7-jdk 
+RUN apt-get install -y ssh
+
+
+
+# create need folder
+RUN mkdir -p /usr/local
 
 # move all configuration files into container
 ADD files/* /usr/local/  
+
 
 # set jave environment variable 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64 
@@ -21,7 +31,23 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
 mv /usr/local/ssh_config ~/.ssh/config && \
 sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
-#install hadoop 2.30
-RUN ln -s /usr/local/hadoop-2.3.0 /usr/local/hadoop && \
-mv /usr/local/bashrc ~/.bashrc && \
+#install hadoop 2.7.2
+#RUN cd /usr/local/ && \
+#tar -zxf hadoop-2.7.2.tar.gz && \
+
+RUN mv /usr/local/hadoop-2.7.2  /usr/local/hadoop && \
+mv /usr/local/bashrc ~/.bashrc  && \
 mv /usr/local/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh 
+
+
+
+
+
+
+
+
+
+
+
+
+

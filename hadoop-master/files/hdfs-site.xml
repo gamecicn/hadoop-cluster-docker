@@ -8,7 +8,7 @@
  </property>
  <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:///root/hdfs/namenode</value>
+        <value>file:///root/hdfs/namenode</value>https://github.com/
         <description>NameNode directory for namespace and transaction logs storage.</description>
  </property>
 

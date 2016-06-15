@@ -1,6 +1,6 @@
-FROM kiwenlau/hadoop-base:0.1.0
+FROM base.hadoop.cluster
 
-MAINTAINER KiwenLau <kiwenlau@gmail.com>
+MAINTAINER Martin Guo <martin.guo@irdeto.com>
 
 # move all confugration /tmp into container
 ADD files/* /tmp/
