@@ -12,4 +12,8 @@ sleep 5
 
 serf members
 
-echo -e "\nhadoop-cluster-docker developed by Kiwenlau <kiwenlau@gmail.com>"
+# Add master namenode to /etc/hosts
+echo "$MASTER_NAMENODE_IP master.migu.irdeto.com">> /etc/hosts
+
+# restart sshd for new port start 
+/etc/init.d/ssh restart

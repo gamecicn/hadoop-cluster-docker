@@ -25,10 +25,12 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV PATH $PATH:$JAVA_HOME/bin
 
 #configure ssh free key access
+#change sshd port from 22 to 22022 avoid conflict with host
 RUN mkdir /var/run/sshd && \
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
 mv /usr/local/ssh_config ~/.ssh/config && \
+mv /usr/local/sshd_config /etc/ssh/sshd_config && \
 sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 #install hadoop 2.7.2
@@ -39,7 +41,8 @@ RUN mv /usr/local/hadoop-2.7.2  /usr/local/hadoop && \
 mv /usr/local/bashrc ~/.bashrc  && \
 mv /usr/local/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh 
 
-
+# Config ssh
+RUN mv files/authorized_keys   /root/.ssh/authorized_keys
 
 
 
